@@ -1,29 +1,31 @@
-import { UserSelect } from "../../user/ui/user-select";
+import { ReactNode } from 'react'
+// import { UserSelect } from '../../user/ui/user-select'
 
 export const TaskItem = ({
+  id,
   title,
   done,
-  onDelete,
   onToggleDone,
-  onChangeOwner,
-  ownerId,
+  onDelete,
+  userSelect,
 }: {
-  title: string;
-  done: boolean;
-  ownerId?: string;
-  onChangeOwner: (ownerId: string) => void;
-  onToggleDone: () => void;
-  onDelete: () => void;
+  id: string
+  title: string
+  done: boolean
+  onToggleDone: (id: string) => void
+  onDelete: (id: string) => void
+  userSelect: ReactNode
 }) => {
   return (
-    <div style={{ display: "flex", gap: "10px", padding: "10px" }}>
+    <div style={{ display: 'flex', gap: '10px', padding: '10px' }}>
       <label>
-        <input type="checkbox" checked={done} onChange={onToggleDone} />
+        <input type='checkbox' checked={done} onChange={() => onToggleDone(id)} />
         done
       </label>
-      <button onClick={() => onDelete()}>Delete task</button>
-      <UserSelect userId={ownerId} onChangeUserId={onChangeOwner} />
+      <button onClick={() => onDelete(id)}>Delete task</button>
+      {/* <UserSelect userId={ownerId} onChangeUserId={onChangeOwner} /> */}
+      {userSelect}
       <div>{title}</div>
     </div>
-  );
-};
+  )
+}
